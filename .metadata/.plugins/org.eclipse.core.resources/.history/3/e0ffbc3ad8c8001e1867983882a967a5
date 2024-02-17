@@ -1,0 +1,5 @@
+package com.doctorapp.services;
+
+public class AppointmentService {
+
+}

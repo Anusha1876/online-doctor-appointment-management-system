@@ -1,0 +1,98 @@
+package com.doctorapp.controllers;
+
+import java.sql.Date;
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.doctorapp.entities.Doctor;
+import com.doctorapp.entities.DoctorTimeTable;
+import com.doctorapp.services.DoctorService;
+import com.doctorapp.services.DoctorTimeTableService;
+
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+public class DoctorTimeTableController {
+
+	@Autowired
+	DoctorTimeTableService doctorTimeTableService;
+	
+	@Autowired
+	DoctorService doctorService;
+	
+	@PostMapping("/savetimetable")
+    public ResponseEntity<String> saveTimeTable(@RequestBody DoctorTimeTable doctorTimeTable) {
+        DoctorTimeTable savedTimeTable = doctorTimeTableService.saveTimeTable(doctorTimeTable);
+        if (savedTimeTable != null) {
+            return ResponseEntity.ok("Timetable entry added successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to add timetable entry!");
+        }
+    }
+	
+	
+	
+	@GetMapping("/getalltimetable")
+	public List<DoctorTimeTable> getAllTimeTable(){
+		return doctorTimeTableService.getAllTimeTable();
+	}
+	
+	@GetMapping("/gettimetablebyid/{id}")
+	public DoctorTimeTable getTimeTableById(@PathVariable int id) {
+		return doctorTimeTableService.getTimeTableById(id);
+	}
+	
+	@GetMapping("/getdoctortimetablebydoctorId/{id}")
+	public List<DoctorTimeTable> getDoctorTimeTableByDoctorId(@PathVariable int id){
+		Doctor d = doctorService.getDoctorByDoctorId(id);
+		return doctorTimeTableService.getDoctorTimeTableByDoctorId(d);
+	}
+	
+	@PostMapping("/updatetimetable")
+	public DoctorTimeTable updateTimeTable(@RequestBody DoctorTimeTable dtt) {
+		return doctorTimeTableService.updateTimeTable(dtt);
+	}
+	
+	@GetMapping("/getappointmentsforday/{id}/{date}")
+	public List<LocalTime> getAppointmentsForDayByDoctorIdAndDay(@PathVariable int id,@PathVariable Date date){
+		System.out.println(id+" "+date);
+		Doctor d = doctorService.getDoctorByDoctorId(id);
+		return doctorTimeTableService.getAppointmentsForDayByDoctorIdAndDay(d,date);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

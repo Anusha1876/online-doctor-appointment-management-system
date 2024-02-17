@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnoreProperties"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.AppointmentRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.AreaRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.DoctorTimeTableRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.LoginRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.DoctorRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.PatientRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.repositories.StateRepository"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.AppointmentService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.Appointment"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.CityService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.City"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.AreaService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.DoctorRegistration"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.Area"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.DoctorTimeTableService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.DoctorService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.DoctorTimeTable"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.Doctor"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.PatientService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.LoginService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.Patient"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.Login"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.PatientRegisteration"/>
+    <fullyQualifiedTypeName name="com.doctorapp.services.StateService"/>
+    <fullyQualifiedTypeName name="com.doctorapp.entities.State"/>
+    <fullyQualifiedTypeName name="org.springframework.mail.SimpleMailMessage"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.context.event.ApplicationReadyEvent"/>
+    <fullyQualifiedTypeName name="org.springframework.context.event.EventListener"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.DayOfWeek"/>
+    <fullyQualifiedTypeName name="java.time.ZoneId"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
+    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="java.time.LocalTime"/>
+    <fullyQualifiedTypeName name="com.twilio.Twilio"/>
+</qualifiedTypeNameHistroy>

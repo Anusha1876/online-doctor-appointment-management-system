@@ -1,0 +1,43 @@
+package com.doctorapp.repositories;
+
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.doctorapp.entities.Doctor;
+import com.doctorapp.entities.DoctorTimeTable;
+
+import jakarta.transaction.Transactional;
+
+
+@Repository
+public interface DoctorTimeTableRepository extends JpaRepository<DoctorTimeTable, Integer> {
+	
+	@Query("select dtt from DoctorTimeTable dtt where doctor_id = :d")
+	public List<DoctorTimeTable> getDoctorTimeTableByDoctorId(Doctor d);
+
+	@Query("select dtt from DoctorTimeTable dtt where doctor_id = :d and weekday = :day")
+	public DoctorTimeTable getAppointmentsForDayByDoctorIdAndDay(Doctor d, String day);
+	
+	@Modifying
+    @Transactional
+    @Query("INSERT INTO DoctorTimeTable(doctor_id, weekday, startTime, endTime, slotDuration, breakTime, status) " +
+            "VALUES (:doctorId, :weekday, :startTime, :endTime, :slotDuration, :breakTime, :status)")
+    void saveDoctorTimeTable(@Param("doctorId") Doctor doctor,
+                             @Param("weekday") String weekday,
+                             @Param("startTime") LocalTime startTime,
+                             @Param("endTime") LocalTime endTime,
+                             @Param("slotDuration") int slotDuration,
+                             @Param("breakTime") LocalTime breakTime,
+                             @Param("status") String status);
+	
+}
+
+
+
+

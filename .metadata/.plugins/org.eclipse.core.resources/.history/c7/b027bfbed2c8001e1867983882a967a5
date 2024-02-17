@@ -1,0 +1,5 @@
+package com.doctorapp.entities;
+
+public class Doctor {
+
+}

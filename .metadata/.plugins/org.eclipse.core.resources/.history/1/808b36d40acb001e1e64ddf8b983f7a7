@@ -1,0 +1,130 @@
+package com.doctorapp.services;
+
+import java.sql.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.doctorapp.entities.Doctor;
+import com.doctorapp.entities.DoctorTimeTable;
+import com.doctorapp.repositories.DoctorTimeTableRepository;
+
+
+
+@Service
+public class DoctorTimeTableService {
+	
+	@Autowired
+	DoctorTimeTableRepository doctorTimeTableRepository;
+	
+	@Autowired
+	AppointmentService appointmentService;
+	
+	public List<DoctorTimeTable> getAllTimeTable(){
+		return doctorTimeTableRepository.findAll();
+	}
+	
+	
+	public DoctorTimeTable getTimeTableById(int id) {
+		return doctorTimeTableRepository.getReferenceById(id);
+	}
+	
+	public List<DoctorTimeTable> getDoctorTimeTableByDoctorId(Doctor d) {
+		return doctorTimeTableRepository.getDoctorTimeTableByDoctorId(d);
+	}
+
+	public DoctorTimeTable updateTimeTable(DoctorTimeTable dtt) {
+		try {
+			return doctorTimeTableRepository.save(dtt);
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
+//	public DoctorTimeTable saveTimeTable(DoctorTimeTable dtt) {
+//		try {
+//			return doctorTimeTableRepository.save(dtt);
+//		}catch(Exception e) {
+//			return null;
+//		}
+//	}
+	
+	
+	
+
+	public List<LocalTime> getAppointmentsForDayByDoctorIdAndDay(Doctor d, Date date) {
+	    try {
+	        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+	        int da = dayOfWeek.getValue() - 1;
+	        String day = switch(da) {
+	            case 0 -> "Sunday";
+	            case 1 -> "Monday";
+	            case 2 -> "Tuesday";
+	            case 3 -> "Wednesday";
+	            case 4 -> "Thursday";
+	            case 5 -> "Friday";
+	            case 6 -> "Saturday";
+	            default -> throw new IllegalStateException("Unexpected value: " + da);
+	        };
+
+	        List<LocalTime> slots = new ArrayList<>();
+	        DoctorTimeTable dtt = doctorTimeTableRepository.getAppointmentsForDayByDoctorIdAndDay(d, day);
+	        if (dtt != null && dtt.getStatus().equals("available")) {
+	            LocalTime st = dtt.getStartTime();
+	            LocalTime et = dtt.getEndTime();
+	            LocalTime temp = st;
+	            while (temp.isBefore(et)) {
+	                slots.add(temp);
+	                temp = temp.plus(dtt.getSlotDuration());
+	            }
+	            slots.remove(dtt.getBreakTime());
+	            List<Object> bookedAppointments = appointmentService.getBookedAppointmentsByDoctorIdandDate(d, date);
+	            slots.removeAll(bookedAppointments);
+	        }
+	        return slots;
+	    } catch (NullPointerException | IllegalArgumentException e) {
+	        // Log the exception or handle it appropriately
+	        return new ArrayList<>(); // or return null, depending on the desired behavior
+	    }
+	}
+
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
